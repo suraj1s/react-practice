@@ -36,6 +36,7 @@ class Circle {
   //   };
 
   updateCircle = () => {
+    // drawing
     this.canvas2d.fillStyle = this.randomColor;
     this.canvas2d.fillRect(
       this.x - this.radius / 2,
@@ -44,6 +45,8 @@ class Circle {
       this.radius
     );
     this.drawCircle();
+
+    // updating position
     if (
       this.dx &&
       (this.x + this.radius > innerWidth || this.x - this.radius < 0)
@@ -58,6 +61,9 @@ class Circle {
     }
     if (this.dx) this.x += this.dx;
     if (this.dy) this.y += this.dy;
+
+    // interactivity
+   
   };
 }
 
