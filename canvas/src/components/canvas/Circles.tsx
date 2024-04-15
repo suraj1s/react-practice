@@ -40,7 +40,7 @@ const Circles = () => {
     const x = e.clientX - e.currentTarget.offsetLeft;
     const y = e.clientY - e.currentTarget.offsetTop;
     const radius = Math.random() * 10 + 100;
-    const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    const randomColor = "#" + Math.floor(Math.random() * 9999).toString(16);
     const circle = new Circle(canvas2d, x, y, radius, randomColor);
     circles.push(circle);
   };

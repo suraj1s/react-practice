@@ -30,6 +30,10 @@ class Line {
       this.canvas2d.stroke();
     }
   };
+
+  clearLine = () => {
+    this.canvas2d.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  };
 }
 
 export default Line;

@@ -15,23 +15,23 @@ const Lines = () => {
     e: React.MouseEvent<HTMLCanvasElement, MouseEvent>
   ) => {
     // console.log("mouse down");
-    if (!e.currentTarget) return;
-    const canvas2d = e.currentTarget.getContext("2d");
+    if (!canvasRef.current) return;
+    const canvas2d = canvasRef.current.getContext("2d");
     if (!canvas2d) return;
-    const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    const randomColor = "#" + Math.floor(Math.random() * 999).toString(16);
     line = new Line(canvas2d, randomColor);
-    const x = e.clientX - e.currentTarget.offsetLeft;
-    const y = e.clientY - e.currentTarget.offsetTop;
+    const x = e.clientX - canvasRef.current.offsetLeft;
+    const y = e.clientY - canvasRef.current.offsetTop;
     line?.drawLine({ x, y });
   };
 
   const handelLineMove = (
     e: React.MouseEvent<HTMLCanvasElement, MouseEvent>
   ) => {
-    // console.log("mouse move");
     if (!line) return;
-    const x = e.clientX - e.currentTarget.offsetLeft;
-    const y = e.clientY - e.currentTarget.offsetTop;
+    if (!canvasRef.current) return;
+    const x = e.clientX - canvasRef.current.offsetLeft;
+    const y = e.clientY - canvasRef.current.offsetTop;
     line.updateLine({ mouseMoveX: x, mouseMoveY: y });
   };
 
