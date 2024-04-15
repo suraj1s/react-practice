@@ -35,7 +35,13 @@ class Circle {
   //     return "#" + Math.floor(Math.random() * 16777215).toString(16);
   //   };
 
-  updateCircle = () => {
+  updateCircle = ({
+    mouseMoveX,
+    mouseMoveY,
+  }: {
+    mouseMoveX?: number;
+    mouseMoveY?: number;
+  }) => {
     // drawing
     this.canvas2d.fillStyle = this.randomColor;
     this.canvas2d.fillRect(
@@ -63,7 +69,19 @@ class Circle {
     if (this.dy) this.y += this.dy;
 
     // interactivity
-   
+    if (
+      mouseMoveX &&
+      mouseMoveY &&
+      this.x - mouseMoveX < 50 &&
+      this.x - mouseMoveX > -50 &&
+      this.y - mouseMoveY < 50 &&
+      this.y - mouseMoveY > -50
+    ) {
+      if (this.radius < 300 && this.dx && this.dy){ this.radius += 1
+        this.x += this.dx * 20;
+        this.y -= this.dy * 20;
+      };
+    } else if (this.radius > 50) this.radius -= 1;
   };
 }
 

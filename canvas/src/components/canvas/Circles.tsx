@@ -20,13 +20,13 @@ const Circles = () => {
     const animateCircle = () => {
       canvas2d.clearRect(0, 0, innerWidth, innerHeight);
       circles.forEach((circle) => {
-        circle.updateCircle();
+        circle.updateCircle({});
       });
     };
     animateCircle();
     const interval = setInterval(() => {
       requestAnimationFrame(animateCircle);
-    }, 2);
+    }, 10);
 
     return () => {
       clearInterval(interval);
@@ -39,17 +39,31 @@ const Circles = () => {
     if (!canvas2d) return;
     const x = e.clientX - e.currentTarget.offsetLeft;
     const y = e.clientY - e.currentTarget.offsetTop;
-    const radius = Math.random() * 10 + 10;
+    const radius = Math.random() * 10 + 100;
     const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     const circle = new Circle(canvas2d, x, y, radius, randomColor);
     circles.push(circle);
   };
+
+  const handelCircleAnimation = (e : React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+    if (!e.currentTarget) return;
+    const mouseMoveX = e.clientX - e.currentTarget.offsetLeft;
+    const mouseMoveY = e.clientY - e.currentTarget.offsetTop;
+    // console.log(mouseMoveX, mouseMoveY , "mouseMoveX, mouseMoveY")
+      circles.forEach((circle) => {
+        circle.updateCircle({mouseMoveX, mouseMoveY});
+      }
+    );
+  }
 
   return (
     <div>
       <canvas
         onClick={(e) => {
           handelCircle(e);
+        }}
+        onMouseMove={(e) => {
+          handelCircleAnimation(e);
         }}
         ref={canvasRef}
         className="border-2  border-slate-300 rounded-md"
