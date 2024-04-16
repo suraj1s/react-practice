@@ -6,8 +6,8 @@ const Circles = () => {
 
   useEffect(() => {
     if (!canvasRef.current) return;
-    canvasRef.current.width = window.innerWidth;
-    canvasRef.current.height = window.innerHeight;
+    canvasRef.current.width = window.innerWidth *  0.8;
+    canvasRef.current.height = window.innerHeight *  0.8;
   }, []);
 
   const circles: Circle[] = [];
@@ -18,7 +18,7 @@ const Circles = () => {
     if (!canvas2d) return;
 
     const animateCircle = () => {
-      canvas2d.clearRect(0, 0, innerWidth, innerHeight);
+      canvas2d.clearRect(0, 0, innerWidth *  0.8, innerHeight *  0.8);
       circles.forEach((circle) => {
         circle.updateCircle({});
       });
