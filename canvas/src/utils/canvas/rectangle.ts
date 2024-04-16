@@ -21,39 +21,49 @@ class Rectangle {
   }
 
   draw() {
-    this.canvas2d.clearRect(0, 0, window.innerWidth *  0.8, window.innerHeight *  0.8);
+    this.canvas2d.clearRect(
+      0,
+      0,
+      window.innerWidth * 0.8,
+      window.innerHeight * 0.8
+    );
     this.canvas2d.strokeStyle = "white";
-    this.canvas2d.strokeRect(this.x, this.y, this.width, this.height)
+    this.canvas2d.strokeRect(this.x, this.y, this.width, this.height);
     this.drawHandles();
   }
 
   update(x?: number, y?: number) {
-    if(x) this.width = x - this.x;
-    if(y) this.height = y - this.y;
+    if (x) this.width = x - this.x;
+    if (y) this.height = y - this.y;
     this.draw();
   }
 
-    drawCircle(x: number, y: number, radius : number) {
-    this.canvas2d.fillStyle = "#FF0000";
+  drawCircle(x: number, y: number, radius: number) {
+    this.canvas2d.fillStyle = "gray";
     this.canvas2d.beginPath();
     this.canvas2d.arc(x, y, radius, 0, 2 * Math.PI);
     this.canvas2d.fill();
   }
-  
-    drawHandles() {
+
+  drawHandles() {
     this.drawCircle(this.x, this.y, this.closeEnough);
     this.drawCircle(this.x + this.width, this.y, this.closeEnough);
-    this.drawCircle(this.x + this.width, this.y + this.height, this.closeEnough);
+    this.drawCircle(
+      this.x + this.width,
+      this.y + this.height,
+      this.closeEnough
+    );
     this.drawCircle(this.x, this.y + this.height, this.closeEnough);
   }
 
   isIntersecting(x: number, y: number) {
     const isIntersectingLeft = x > this.x - 5 && x < this.x + 5;
-    const isIntersectingRight = x > this.x + this.width - 5 && x < this.x + this.width + 5;
+    const isIntersectingRight =
+      x > this.x + this.width - 5 && x < this.x + this.width + 5;
     return {
       isIntersectingLeft,
-      isIntersectingRight
-    }
+      isIntersectingRight,
+    };
   }
 }
 
