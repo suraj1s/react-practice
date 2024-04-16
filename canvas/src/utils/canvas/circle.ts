@@ -55,13 +55,13 @@ class Circle {
     // updating position
     if (
       this.dx &&
-      (this.x + this.radius > innerWidth || this.x - this.radius < 0)
+      (this.x + this.radius > innerWidth *  0.8 || this.x - this.radius < 0)
     ) {
       this.dx = -this.dx;
     }
     if (
       this.dy &&
-      (this.y + this.radius > innerHeight || this.y - this.radius < 0)
+      (this.y + this.radius > innerHeight *  0.8 || this.y - this.radius < 0)
     ) {
       this.dy = -this.dy;
     }

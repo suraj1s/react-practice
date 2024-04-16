@@ -1,16 +1,27 @@
-// import Circles from "./components/canvas/Circles"
-// import Lines from "./components/canvas/Lines"
+import Circles from "./components/canvas/Circles";
+import Lines from "./components/canvas/Lines";
+import Rectangles from "./components/canvas/Rectangles";
+import SideNavbar, {
+  ISideNavbarItemsType,
+} from "./components/common/SIdeNavbar";
 
-import Rectangles from "./components/canvas/Rectangles"
-
-const App = () => {
-  return (
-    <body  className="min-h-screen min-w-screen  bg-slate-100 ">
-      {/* <Circles /> */}
-      {/* <Lines /> */}
-      <Rectangles />
-    </body>
-  )
+export default function App() {
+  const sideNavbar: ISideNavbarItemsType[] = [
+    {
+      id: 1,
+      name: "Circles",
+      component: <Circles />,
+    },
+    {
+      id: 2,
+      name: "Lines",
+      component: <Lines />,
+    },
+    {
+      id: 3,
+      name: "Rectangles",
+      component: <Rectangles />,
+    },
+  ];
+  return <SideNavbar sideNavbarItems={sideNavbar} />;
 }
-
-export default App

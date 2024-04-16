@@ -32,7 +32,7 @@ class Line {
   };
 
   clearLine = () => {
-    this.canvas2d.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    this.canvas2d.clearRect(0, 0, window.innerWidth *  0.8, window.innerHeight *  0.8);
   };
 }
 

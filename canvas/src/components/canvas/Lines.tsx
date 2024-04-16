@@ -6,8 +6,8 @@ const Lines = () => {
 
   useEffect(() => {
     if (!canvasRef.current) return;
-    canvasRef.current.width = window.innerWidth;
-    canvasRef.current.height = window.innerHeight;
+    canvasRef.current.width = window.innerWidth *  0.8;
+    canvasRef.current.height = window.innerHeight *  0.8;
   }, []);
 
   let line: Line | null = null;

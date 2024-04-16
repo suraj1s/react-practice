@@ -36,10 +36,10 @@ const handelAnimation = ({
     canvas2d.stroke();
 
     // Boundary conditions for bouncing
-    if (x + radius > innerWidth || x - radius < 0) {
+    if (x + radius > innerWidth * 0.8 || x - radius < 0) {
       dx = -dx;
     }
-    if (y + radius > innerHeight || y - radius < 0) {
+    if (y + radius > innerHeight * 0.8 || y - radius < 0) {
       dy = -dy;
     }
     x += dx;
@@ -109,10 +109,10 @@ canvas2d.beginPath();
 canvas2d.arc(x, y, radius, 0, Math.PI \* 2);
 canvas2d.strokeStyle = randomHexColor;
 canvas2d.stroke();
-if (x + radius > innerWidth || x - radius < 0) {
+if (x + radius > innerWidth *  0.8 || x - radius < 0) {
 dx = -dx;
 }
-if (y + radius > innerHeight || y - radius < 0) {
+if (y + radius > innerHeight *  0.8 || y - radius < 0) {
 dy = -dy;
 }
 x += dx;
@@ -156,10 +156,10 @@ canvas2d.beginPath();
 canvas2d.arc(x, y, radius, 0, Math.PI \* 2);
 canvas2d.strokeStyle = randomHexColor;
 canvas2d.stroke();
-if (x + radius > innerWidth || x - radius < 0) {
+if (x + radius > innerWidth *  0.8 || x - radius < 0) {
 dx = -dx;
 }
-if (y + radius > innerHeight || y - radius < 0) {
+if (y + radius > innerHeight *  0.8 || y - radius < 0) {
 dy = -dy;
 }
 x += dx;
