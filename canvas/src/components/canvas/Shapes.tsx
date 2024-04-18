@@ -10,9 +10,9 @@ const Shapes = () => {
     canvasRef.current.width = CANVAS_WIDTH;
     canvasRef.current.height = CANVAS_HEIGHT;
 
-    const canvas2d = canvasRef.current.getContext("2d");
-    if (!canvas2d) return;
-    shape = new Shape(canvas2d, CANVAS_WIDTH/2, CANVAS_HEIGHT/2);
+    // const canvas2d = canvasRef.current.getContext("2d");
+    // if (!canvas2d) return;
+    // shape = new Shape(canvas2d, CANVAS_WIDTH/2, CANVAS_HEIGHT/2);
   }, []);
 
   let shape: Shape | null = null;
@@ -43,8 +43,9 @@ const Shapes = () => {
   return (
     <div className="space-y-2">
  <button className="border rounded-md px-3 py-1 " onClick={() => {
-        if (shape) shape.clearShape();
-      }}>Clear All</button>      <canvas
+        if (shape) shape.clearShape()
+      }}>Clear All</button>     
+       <canvas
         onMouseDown={(e) => {
           isDrawing = true;
           handelMouseDown(e);
