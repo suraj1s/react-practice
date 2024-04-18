@@ -35,5 +35,9 @@ export default function App() {
       component: <Shapes />,
     },
   ];
-  return <SideNavbar sideNavbarItems={sideNavbar} />;
+  return <div className="h-screen w-screen px-10 bg-slate-950 text-slate-300">
+    <Shapes />;
+
+  </div> 
+  // return <SideNavbar sideNavbarItems={sideNavbar} />;
 }

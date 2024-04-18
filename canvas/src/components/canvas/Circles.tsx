@@ -1,13 +1,14 @@
 import { useEffect, useRef } from "react";
 import Circle from "../../utils/canvas/circle";
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../../utils/constants";
 
 const Circles = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (!canvasRef.current) return;
-    canvasRef.current.width = window.innerWidth *  0.8;
-    canvasRef.current.height = window.innerHeight *  0.8;
+    canvasRef.current.width = CANVAS_WIDTH;
+    canvasRef.current.height = CANVAS_HEIGHT;
   }, []);
 
   const circles: Circle[] = [];

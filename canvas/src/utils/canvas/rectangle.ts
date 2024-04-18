@@ -26,8 +26,8 @@ class Rectangle {
     this.canvas2d.clearRect(
       0,
       0,
-       window.innerWidth * CANVAS_WIDTH,
-       window.innerHeight * CANVAS_HEIGHT,
+      CANVAS_WIDTH,
+       CANVAS_HEIGHT,
     );
     this.canvas2d.strokeStyle = "white";
     this.canvas2d.strokeRect(this.x, this.y, this.width, this.height);

@@ -7,12 +7,17 @@ const Shapes = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     if (!canvasRef.current) return;
-    canvasRef.current.width = window.innerWidth * CANVAS_WIDTH;
-    canvasRef.current.height = window.innerHeight * CANVAS_HEIGHT;
+    canvasRef.current.width = CANVAS_WIDTH;
+    canvasRef.current.height = CANVAS_HEIGHT;
+
+    const canvas2d = canvasRef.current.getContext("2d");
+    if (!canvas2d) return;
+    shape = new Shape(canvas2d, CANVAS_WIDTH/2, CANVAS_HEIGHT/2);
   }, []);
 
   let shape: Shape | null = null;
 
+  
   const handelMouseDown = (
     e: React.MouseEvent<HTMLCanvasElement, MouseEvent>
   ) => {
@@ -22,7 +27,6 @@ const Shapes = () => {
     const x = e.clientX - canvasRef.current.offsetLeft;
     const y = e.clientY - canvasRef.current.offsetTop;
     shape = new Shape(canvas2d, x, y);
-    shape.drawShape();
   };
 
   const handelMouseMove = (

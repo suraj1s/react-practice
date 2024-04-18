@@ -7,8 +7,8 @@ const Lines = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     if (!canvasRef.current) return;
-    canvasRef.current.width =  window.innerWidth * CANVAS_WIDTH;
-    canvasRef.current.height =  window.innerHeight * CANVAS_HEIGHT;
+    canvasRef.current.width = CANVAS_WIDTH;
+    canvasRef.current.height =  CANVAS_HEIGHT;
   }, []);
 
   let template: Template | null = null;

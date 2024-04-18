@@ -8,8 +8,8 @@ const Rectangles = () => {
 
   useEffect(() => {
     if (!canvasRef.current) return;
-    canvasRef.current.width =  window.innerWidth * CANVAS_WIDTH;
-    canvasRef.current.height =  window.innerHeight * CANVAS_HEIGHT;
+    canvasRef.current.width = CANVAS_WIDTH;
+    canvasRef.current.height =  CANVAS_HEIGHT;
   }, []);
   let dragTL = false;
   let dragBL = false;

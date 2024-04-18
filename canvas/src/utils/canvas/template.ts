@@ -35,8 +35,8 @@ class Template {
     this.canvas2d.clearRect(
       0,
       0,
-      window.innerWidth * CANVAS_WIDTH,
-      window.innerHeight * CANVAS_HEIGHT
+     CANVAS_WIDTH,
+      CANVAS_HEIGHT
     );
   };
 }

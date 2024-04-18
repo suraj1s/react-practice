@@ -1,3 +1,5 @@
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../constants";
+
 class Line {
   canvas2d: CanvasRenderingContext2D;
   randomColor: string;
@@ -32,7 +34,7 @@ class Line {
   };
 
   clearLine = () => {
-    this.canvas2d.clearRect(0, 0, window.innerWidth *  0.8, window.innerHeight *  0.8);
+    this.canvas2d.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   };
 }
 
