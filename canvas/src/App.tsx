@@ -1,5 +1,5 @@
 import Circles from "./components/canvas/Circles";
-import Lines from "./components/canvas/Lines";
+// import Lines from "./components/canvas/Lines";
 import Rectangles from "./components/canvas/Rectangles";
 import Shapes from "./components/canvas/Shapes";
 import Templates from "./components/canvas/Templates";
@@ -11,7 +11,7 @@ export default function App() {
   const sideNavbar: ISideNavbarItemsType[] = [
     {
       id: 1,
-      name: "Templates",
+      name: "Template",
       component: <Templates />,
     },
     {
@@ -19,11 +19,11 @@ export default function App() {
       name: "Circles",
       component: <Circles />,
     },
-    {
-      id: 3,
-      name: "Lines",
-      component: <Lines />,
-    },
+    // {
+    //   id: 3,
+    //   name: "Lines",
+    //   component: <Lines />,
+    // },
     {
       id: 4,
       name: "Rectangles",

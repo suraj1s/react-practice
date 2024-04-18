@@ -1,6 +1,6 @@
 import { CANVAS_COLOR_NUMBER, CANVAS_HEIGHT, CANVAS_WIDTH } from "../constants";
 
-class Template {
+class Shape {
   canvas2d: CanvasRenderingContext2D;
   x: number;
   y: number;
@@ -10,20 +10,20 @@ class Template {
     this.x = x;
     this.y = y;
     this.randomColor = this.getRandHexColor();
-    this.drawTemplate();
+    this.drawShape();
   }
   getRandHexColor = () => {
     return "#" + Math.floor(Math.random() * CANVAS_COLOR_NUMBER).toString(16);
   };
 
-  drawTemplate = () => {
+  drawShape = () => {
     this.canvas2d.beginPath();
     this.canvas2d.moveTo(this.x, this.y);
     this.canvas2d.strokeStyle = this.randomColor;
     this.canvas2d.stroke();
   };
 
-  updateTemplate = ({ x, y }: { x?: number; y?: number }) => {
+  updateShape = ({ x, y }: { x?: number; y?: number }) => {
     if (x && y) {
       this.canvas2d.lineTo(x, y);
       this.canvas2d.strokeStyle = this.randomColor;
@@ -31,7 +31,7 @@ class Template {
     }
   };
 
-  clearTemplate = () => {
+  clearShape = () => {
     this.canvas2d.clearRect(
       0,
       0,
@@ -41,4 +41,4 @@ class Template {
   };
 }
 
-export default Template;
+export default Shape;

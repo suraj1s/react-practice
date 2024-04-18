@@ -148,7 +148,9 @@ const Rectangles = () => {
   };
 
   return (
-    <div>
+    <div className="space-y-4"> 
+            <button className="border rounded-md px-3 py-1 " onClick={handelRectanglestart}>Create Rect</button>
+
       <canvas
         onMouseDown={handelRectangleIsResize}
         onMouseMoveCapture={handelRectangleResize}
@@ -165,7 +167,6 @@ const Rectangles = () => {
         ref={canvasRef}
         className={` border-2  border-slate-300 rounded-md `}
       />
-      <button onClick={handelRectanglestart}>Create Rect</button>
     </div>
   );
 };
