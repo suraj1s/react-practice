@@ -1,10 +1,12 @@
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../constants";
+
 class Rectangle {
   x: number;
   y: number;
   canvas2d: CanvasRenderingContext2D;
   width: number;
   height: number;
-  closeEnough = 10;
+  closeEnough = 5;
   constructor(
     canvas2d: CanvasRenderingContext2D,
     x: number,
@@ -24,18 +26,30 @@ class Rectangle {
     this.canvas2d.clearRect(
       0,
       0,
-      window.innerWidth * 0.8,
-      window.innerHeight * 0.8
+       window.innerWidth * CANVAS_WIDTH,
+       window.innerHeight * CANVAS_HEIGHT,
     );
     this.canvas2d.strokeStyle = "white";
     this.canvas2d.strokeRect(this.x, this.y, this.width, this.height);
     this.drawHandles();
   }
 
-  update(x?: number, y?: number) {
-    if (x) this.width = x - this.x;
-    if (y) this.height = y - this.y;
-    this.draw();
+  drawHandles() {
+    // for four corners
+    this.drawCircle(this.x, this.y, this.closeEnough);
+    this.drawCircle(this.x + this.width, this.y, this.closeEnough);
+    this.drawCircle(
+      this.x + this.width,
+      this.y + this.height,
+      this.closeEnough
+    );
+    this.drawCircle(this.x, this.y + this.height, this.closeEnough);
+    
+    // for four sides
+    this.drawCircle(this.x + this.width / 2, this.y, this.closeEnough);
+    this.drawCircle(this.x + this.width / 2, this.y + this.height, this.closeEnough);
+    this.drawCircle(this.x, this.y + this.height / 2, this.closeEnough);
+    this.drawCircle(this.x + this.width, this.y + this.height / 2, this.closeEnough);
   }
 
   drawCircle(x: number, y: number, radius: number) {
@@ -45,16 +59,14 @@ class Rectangle {
     this.canvas2d.fill();
   }
 
-  drawHandles() {
-    this.drawCircle(this.x, this.y, this.closeEnough);
-    this.drawCircle(this.x + this.width, this.y, this.closeEnough);
-    this.drawCircle(
-      this.x + this.width,
-      this.y + this.height,
-      this.closeEnough
-    );
-    this.drawCircle(this.x, this.y + this.height, this.closeEnough);
+
+  update(x?: number, y?: number) {
+    if (x) this.width = x - this.x;
+    if (y) this.height = y - this.y;
+    this.draw();
   }
+
+
 
   isIntersecting(x: number, y: number) {
     const isIntersectingLeft = x > this.x - 5 && x < this.x + 5;
