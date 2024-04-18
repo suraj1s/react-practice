@@ -2,13 +2,13 @@ import { useEffect, useRef } from "react";
 import Template from "../../utils/canvas/template";
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../../utils/constants";
 
-const Lines = () => {
+const Templates = () => {
   let isDrawing = false;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     if (!canvasRef.current) return;
-    canvasRef.current.width = CANVAS_WIDTH;
-    canvasRef.current.height =  CANVAS_HEIGHT;
+    canvasRef.current.width =  CANVAS_WIDTH;
+    canvasRef.current.height = CANVAS_HEIGHT;
   }, []);
 
   let template: Template | null = null;
@@ -16,13 +16,12 @@ const Lines = () => {
   const handelMouseDown = (
     e: React.MouseEvent<HTMLCanvasElement, MouseEvent>
   ) => {
-    console.log("mouse down");
     if (!canvasRef.current) return;
     const canvas2d = canvasRef.current.getContext("2d");
     if (!canvas2d) return;
     const x = e.clientX - canvasRef.current.offsetLeft;
     const y = e.clientY - canvasRef.current.offsetTop;
-    template = new Template(canvas2d,x,y);
+    template = new Template(canvas2d, x, y);
     template.drawTemplate();
   };
 
@@ -31,16 +30,17 @@ const Lines = () => {
   ) => {
     if (!isDrawing) return;
     if (!canvasRef.current) return;
-    if(!template) return;
-    console.log('mouse move')
+    if (!template) return;
     const x = e.clientX - canvasRef.current.offsetLeft;
     const y = e.clientY - canvasRef.current.offsetTop;
-    template.updateTemplate({ x,y });
+    template.updateTemplate({ x, y });
   };
 
   return (
     <div className="space-y-2">
-      <button className="border rounded-md px-3 py-1 ">Clear All</button>
+      <button className="border rounded-md px-3 py-1 " onClick={() => {
+        if (template) template.clearTemplate();
+      }}>Clear All</button>
       <canvas
         onMouseDown={(e) => {
           isDrawing = true;
@@ -48,7 +48,6 @@ const Lines = () => {
         }}
         onMouseMoveCapture={(e) => {
           handelMouseMove(e);
-        
         }}
         onMouseUp={() => {
           isDrawing = false;
@@ -59,4 +58,4 @@ const Lines = () => {
     </div>
   );
 };
-export default Lines;
+export default Templates;

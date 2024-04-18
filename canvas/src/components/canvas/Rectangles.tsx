@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Rectangle from "../../utils/canvas/rectangle";
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../../utils/constants";
 
 const Rectangles = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -7,15 +8,19 @@ const Rectangles = () => {
 
   useEffect(() => {
     if (!canvasRef.current) return;
-    canvasRef.current.width = window.innerWidth * 0.8;
-    canvasRef.current.height = window.innerHeight * 0.8;
+    canvasRef.current.width = CANVAS_WIDTH;
+    canvasRef.current.height =  CANVAS_HEIGHT;
   }, []);
   let dragTL = false;
   let dragBL = false;
   let dragTR = false;
   let dragBR = false;
+  let dragT = false;
+  let dragL = false;
+  let dragB = false;
+  let dragR = false;
 
-  const closeEnough = 10;
+  const closeEnough = 5;
   function checkCloseEnough({ p1, p2 }: { p1: number; p2: number }) {
     return Math.abs(p1 - p2) < closeEnough;
   }
@@ -69,6 +74,38 @@ const Rectangles = () => {
     ) {
       dragBR = true;
     }
+
+    // check Top
+    if (
+      checkCloseEnough({ p1: x, p2: rectangle.x + rectangle.width / 2 }) &&
+      checkCloseEnough({ p1: y, p2: rectangle.y })
+    ) {
+      dragT = true;
+    }
+
+    // check Left
+    if (
+      checkCloseEnough({ p1: x, p2: rectangle.x }) &&
+      checkCloseEnough({ p1: y, p2: rectangle.y + rectangle.height / 2 })
+    ) {
+      dragL = true;
+    }
+
+    // check Bottom
+    if (
+      checkCloseEnough({ p1: x, p2: rectangle.x + rectangle.width / 2 }) &&
+      checkCloseEnough({ p1: y, p2: rectangle.y + rectangle.height })
+    ) {
+      dragB = true;
+    }
+
+    // check Right
+    if (
+      checkCloseEnough({ p1: x, p2: rectangle.x + rectangle.width }) &&
+      checkCloseEnough({ p1: y, p2: rectangle.y + rectangle.height / 2 })
+    ) {
+      dragR = true;
+    }
   };
 
   const handelRectangleResize = (
@@ -79,6 +116,7 @@ const Rectangles = () => {
     if (!canvas2d) return;
     const x = e.clientX - canvasRef.current.offsetLeft;
     const y = e.clientY - canvasRef.current.offsetTop;
+    // for four corners
     if (dragTL) {
       rectangle.width += rectangle.x - x;
       rectangle.height += rectangle.y - y;
@@ -95,12 +133,24 @@ const Rectangles = () => {
     } else if (dragBR) {
       rectangle.width = Math.abs(rectangle.x - x);
       rectangle.height = Math.abs(rectangle.y - y);
+    } else if (dragT) {
+      rectangle.height += rectangle.y - y;
+      rectangle.y = y;
+    } else if (dragL) {
+      rectangle.width += rectangle.x - x;
+      rectangle.x = x;
+    } else if (dragB) {
+      rectangle.height = Math.abs(rectangle.y - y);
+    } else if (dragR) {
+      rectangle.width = Math.abs(rectangle.x - x);
     }
     rectangle.draw();
   };
 
   return (
-    <div>
+    <div className="space-y-4"> 
+            <button className="border rounded-md px-3 py-1 " onClick={handelRectanglestart}>Create Rect</button>
+
       <canvas
         onMouseDown={handelRectangleIsResize}
         onMouseMoveCapture={handelRectangleResize}
@@ -109,11 +159,14 @@ const Rectangles = () => {
           dragBL = false;
           dragTR = false;
           dragBR = false;
+          dragT = false;
+          dragL = false;
+          dragB = false;
+          dragR = false;
         }}
         ref={canvasRef}
         className={` border-2  border-slate-300 rounded-md `}
       />
-      <button onClick={handelRectanglestart}>Create Rect</button>
     </div>
   );
 };

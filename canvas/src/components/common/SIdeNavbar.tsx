@@ -36,8 +36,8 @@ export default function SideNavbar({sideNavbarItems}: {sideNavbarItems: ISideNav
         </div>
 
         <div className="flex-1 pl-10">
-          <div className="flex flex-col  gap-y-10 ">
-            <h1 className="text-4xl font-bold pt-12 whitespace-nowrap">{activeComponent.name}</h1>
+          <div className="flex flex-col  gap-y-5 ">
+            <h1 className="text-4xl font-bold pt-5 whitespace-nowrap">{activeComponent.name}</h1>
             <div>{activeComponent.component}</div>
           </div>
         </div>
