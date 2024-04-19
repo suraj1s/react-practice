@@ -1,3 +1,4 @@
+import Main from "./components/canvas-socket/Main";
 import Circles from "./components/canvas/Circles";
 // import Lines from "./components/canvas/Lines";
 import Rectangles from "./components/canvas/Rectangles";
@@ -36,8 +37,7 @@ export default function App() {
     },
   ];
   return <div className="h-screen w-screen px-10 bg-slate-950 text-slate-300">
-    <Shapes />
-
+    <Main />
   </div> 
   // return <SideNavbar sideNavbarItems={sideNavbar} />;
 }
