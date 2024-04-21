@@ -9,7 +9,7 @@ const Rectangles = () => {
   useEffect(() => {
     if (!canvasRef.current) return;
     canvasRef.current.width = CANVAS_WIDTH;
-    canvasRef.current.height =  CANVAS_HEIGHT;
+    canvasRef.current.height = CANVAS_HEIGHT;
   }, []);
   let dragTL = false;
   let dragBL = false;
@@ -123,16 +123,16 @@ const Rectangles = () => {
       rectangle.x = x;
       rectangle.y = y;
     } else if (dragTR) {
-      rectangle.width = Math.abs(rectangle.x - x);
+      rectangle.width = -(rectangle.x - x);
       rectangle.height += rectangle.y - y;
       rectangle.y = y;
     } else if (dragBL) {
       rectangle.width += rectangle.x - x;
-      rectangle.height = Math.abs(rectangle.y - y);
+      rectangle.height = -(rectangle.y - y);
       rectangle.x = x;
     } else if (dragBR) {
-      rectangle.width = Math.abs(rectangle.x - x);
-      rectangle.height = Math.abs(rectangle.y - y);
+      rectangle.width = -(rectangle.x - x);
+      rectangle.height = -(rectangle.y - y);
     } else if (dragT) {
       rectangle.height += rectangle.y - y;
       rectangle.y = y;
@@ -140,16 +140,21 @@ const Rectangles = () => {
       rectangle.width += rectangle.x - x;
       rectangle.x = x;
     } else if (dragB) {
-      rectangle.height = Math.abs(rectangle.y - y);
+      rectangle.height = -(rectangle.y - y);
     } else if (dragR) {
-      rectangle.width = Math.abs(rectangle.x - x);
+      rectangle.width = -(rectangle.x - x);
     }
     rectangle.draw();
   };
 
   return (
-    <div className="space-y-4"> 
-            <button className="border rounded-md px-3 py-1 " onClick={handelRectanglestart}>Create Rect</button>
+    <div className="space-y-4">
+      <button
+        className="border rounded-md px-3 py-1 "
+        onClick={handelRectanglestart}
+      >
+        Create Rect
+      </button>
 
       <canvas
         onMouseDown={handelRectangleIsResize}

@@ -37,7 +37,8 @@ export default function App() {
     },
   ];
   return <div className="h-screen w-screen px-10 bg-slate-950 text-slate-300">
-    <Main />
+    {/* <Main /> */}
+    <Rectangles />
   </div> 
   // return <SideNavbar sideNavbarItems={sideNavbar} />;
 }
