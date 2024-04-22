@@ -7,6 +7,7 @@ import Templates from "./components/canvas/Templates";
 import SideNavbar, {
   ISideNavbarItemsType,
 } from "./components/common/SIdeNavbar";
+import Games from "./components/game/canvas/Game";
 
 export default function App() {
   const sideNavbar: ISideNavbarItemsType[] = [
@@ -36,8 +37,9 @@ export default function App() {
       component: <Shapes />,
     },
   ];
-  return <div className="h-screen w-screen px-10 bg-slate-950 text-slate-300">
-    <Main />
+  return <div className="h-screen  bg-slate-950 text-slate-300">
+    {/* <Main /> */}
+    <Games />
   </div> 
   // return <SideNavbar sideNavbarItems={sideNavbar} />;
 }
