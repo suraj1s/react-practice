@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { SocketProvider } from "./context/socketProvider.tsx";
+// import { SocketProvider } from "./context/socketProvider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <SocketProvider>
+    {/* <SocketProvider> */}
       <App />
-    </SocketProvider>
+    {/* </SocketProvider> */}
   </React.StrictMode>
 );

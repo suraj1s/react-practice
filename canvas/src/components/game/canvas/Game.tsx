@@ -1,64 +1,44 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../../../utils/constants";
 import Game from "../utils/game";
-const Templates = () => {
-  let isDrawing = false;
+const Games = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const [count, setCount] = useState(0);
   useEffect(() => {
     if (!canvasRef.current) return;
     canvasRef.current.width = CANVAS_WIDTH;
     canvasRef.current.height = CANVAS_HEIGHT;
   }, []);
 
-  let game: Game | null = null;
+  const game = useMemo(() => {
+    return new Game(canvasRef);
+  }, []);
 
-  const handelMouseDown = (
-    e: React.MouseEvent<HTMLCanvasElement, MouseEvent>
-  ) => {
-    if (!canvasRef.current) return;
-    const canvas2d = canvasRef.current.getContext("2d");
-    if (!canvas2d) return;
-    const x = e.clientX - canvasRef.current.offsetLeft;
-    const y = e.clientY - canvasRef.current.offsetTop;
-    console.log(x,y)
-  };
-
-  const handelMouseMove = (
-    e: React.MouseEvent<HTMLCanvasElement, MouseEvent>
-  ) => {
-    if (!isDrawing) return;
-    if (!canvasRef.current) return;
+  const handelKeyDown = (e: React.KeyboardEvent<HTMLCanvasElement>) => {
+    console.log(e.key);
     if (!game) return;
-    const x = e.clientX - canvasRef.current.offsetLeft;
-    const y = e.clientY - canvasRef.current.offsetTop;
-    console.log(x,y)
+    if (e.key === "ArrowLeft") {
+      game.movePlayer("left");
+      setCount(count - 1);
+    }
+    if (e.key === "ArrowRight") {
+      setCount(count + 1);
+      game.movePlayer("right");
+    }
   };
 
   return (
-    <div className="space-y-2">
-      <button
-        className="border rounded-md px-3 py-1 "
-        onClick={() => {
-          // if (game)
-        }}
-      >
-        Clear All
-      </button>
+    <div className="pt-10">
+      <p>{count}</p>
       <canvas
-        onMouseDown={(e) => {
-          isDrawing = true;
-          handelMouseDown(e);
-        }}
-        onMouseMoveCapture={(e) => {
-          handelMouseMove(e);
-        }}
-        onMouseUp={() => {
-          isDrawing = false;
-        }}
+        onKeyDown={handelKeyDown}
         ref={canvasRef}
+        tabIndex={0}
+        autoFocus={true}
         className="border-2  border-slate-300 rounded-md"
       />
     </div>
   );
 };
-export default Templates;
+export default Games;
