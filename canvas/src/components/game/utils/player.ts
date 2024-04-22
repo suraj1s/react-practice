@@ -43,8 +43,3 @@ class Player {
 }
 
 export default Player;
-
-
-// if (this.x + 100 <= this.width/2 || this.x + 100 >= CANVAS_WIDTH - this.width/2) {
-//   this.x = 150
-//  } else

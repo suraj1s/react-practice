@@ -12,11 +12,16 @@ const Games = () => {
   }, []);
 
   const game = useMemo(() => {
-    return new Game(canvasRef);
+    if (canvasRef) return new Game(canvasRef);
   }, []);
 
+  useEffect(() => {
+    console.log("inside useEffect", game?.player.x);
+  }, [game?.player.x]);
+
+  // console.log(game?.plasyer.x)
+
   const handelKeyDown = (e: React.KeyboardEvent<HTMLCanvasElement>) => {
-    console.log(e.key);
     if (!game) return;
     if (e.key === "ArrowLeft") {
       game.movePlayer("left");
@@ -29,7 +34,7 @@ const Games = () => {
   };
 
   return (
-    <div className="pt-10">
+    <div className=" pt-10">
       <p>{count}</p>
       <canvas
         onKeyDown={handelKeyDown}
