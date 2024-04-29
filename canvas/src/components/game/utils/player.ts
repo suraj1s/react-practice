@@ -31,20 +31,17 @@ class Player {
   }
 
   update() {
-    if (this.game.keys.indexOf("ArrowLeft") > -1 && !(this.x <= 0)) {
-      this.x -= this.speed;
-    } else if (
-      this.game.keys.indexOf("ArrowRight") > -1 &&
-      !(this.x >= CANVAS_WIDTH - this.width)
-    ) {
-      this.x += this.speed;
-    }
+    if (this.game.keys.indexOf("ArrowLeft") > -1) this.x -= this.speed;
+    if (this.game.keys.indexOf("ArrowRight") > -1) this.x += this.speed;
+    if (this.x < -this.width / 2) this.x =  - this.width / 2;
+    if (this.x > CANVAS_WIDTH - this.width /2 )
+      this.x = CANVAS_WIDTH - this.width / 2;
   }
 
   shoot() {
     const projectile = this.game.getFreeProjectile();
     if (projectile) {
-      projectile.start({ x: this.x, y: this.y });
+      projectile.start({ x: this.x + this.width / 2, y: this.y });
     }
   }
 }

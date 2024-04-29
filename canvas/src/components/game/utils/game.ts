@@ -6,7 +6,7 @@ class Game {
   public player: Player;
   playerSpeed = 20;
   playerHeight = 30;
-  playerWIdth = 50;
+  playerWidth = 50;
   public projectilesPool: Projectile[] = [];
   noOfProjectiles: number = 15;
   keys: string[] = [];
@@ -15,8 +15,8 @@ class Game {
     this.player = new Player(
       this,
       this.playerSpeed,
+      this.playerWidth,
       this.playerHeight,
-      this.playerWIdth
     );
     this.createProjectiles();
     console.log(this.projectilesPool);
