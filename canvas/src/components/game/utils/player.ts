@@ -5,7 +5,7 @@ class Player {
   x: number;
   y: number;
   constructor(
-    public game : Game,
+    public game: Game,
     public speed: number,
     public width: number,
     public height: number
@@ -18,8 +18,8 @@ class Player {
     this.height = height;
   }
 
-  draw(canvas2d  : CanvasRenderingContext2D | null ) {
-    console.log("player draw.....", canvas2d, this.x, this.height,this.width);
+  draw(canvas2d: CanvasRenderingContext2D | null) {
+    // console.log("player draw.....", canvas2d, this.x, this.height,this.width);
     if (!canvas2d) return;
     canvas2d.fillStyle = "red";
     canvas2d.fillRect(
@@ -30,18 +30,21 @@ class Player {
     );
   }
 
-  move(direction: "left" | "right") {
- if (direction === "left" && !(this.x  <= 0) ) {
+  update() {
+    if (this.game.keys.indexOf("ArrowLeft") > -1 && !(this.x <= 0)) {
       this.x -= this.speed;
-    } else if (direction === "right" && !(this.x  >= CANVAS_WIDTH - this.width)) {
+    } else if (
+      this.game.keys.indexOf("ArrowRight") > -1 &&
+      !(this.x >= CANVAS_WIDTH - this.width)
+    ) {
       this.x += this.speed;
     }
   }
 
-  shoot(){
+  shoot() {
     const projectile = this.game.getFreeProjectile();
-    if(projectile){
-      projectile.start({x: this.x , y: this.y});
+    if (projectile) {
+      projectile.start({ x: this.x, y: this.y });
     }
   }
 }

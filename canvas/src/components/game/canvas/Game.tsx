@@ -31,13 +31,13 @@ const Games = () => {
        game?.render();
     };
     animateGame();
-    // const interval = setInterval(() => {
-    //   requestAnimationFrame(animateGame);
-    // }, 10);
+    const interval = setInterval(() => {
+      requestAnimationFrame(animateGame);
+    }, 100);
 
-    // return () => {
-    //   clearInterval(interval);
-    // };
+    return () => {
+      clearInterval(interval);
+    };
   }, [game]);
 
 

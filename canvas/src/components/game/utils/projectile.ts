@@ -5,37 +5,26 @@ class Projectile {
   y: number;
   public isFree = true;
 
-  constructor(
-    public canvas2d: CanvasRenderingContext2D | null | undefined,
-    public speed: number,
-    public width: number,
-    public height: number,
-    isFree: boolean
-  ) {
-    this.canvas2d = canvas2d;
-    this.speed = speed;
-    this.x = CANVAS_WIDTH / 2 - this.width / 2 - 100;
-    this.y = CANVAS_HEIGHT / 2;
-    this.width = width;
-    this.height = height;
-    this.isFree = isFree;
+  public width: number;
+  public height: number;
+  public speed: number;
+
+  constructor() {
+    this.speed = 20;
+    this.width = 4;
+    this.height = 20;
+    this.x =0;
+    this.y = 0;
     console.log("projectile constructor called...");
   }
 
-  draw() {
-    console.log(
-      "wepon draw.....",
-      this.canvas2d,
+  draw(canvas2d: CanvasRenderingContext2D | null) {
+    console.log("wepon draw.....", this.x, this.height, this.width);
+    if (!canvas2d) return;
+    canvas2d.fillStyle = "blue";
+    canvas2d.fillRect(
       this.x,
-      this.height,
-      this.width
-    );
-    if (!this.canvas2d) return;
-    this.canvas2d.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    this.canvas2d.fillStyle = "red";
-    this.canvas2d.fillRect(
-      this.x,
-      CANVAS_HEIGHT - this.height,
+      this.y,
       this.width,
       this.height
     );
@@ -44,18 +33,18 @@ class Projectile {
   fire() {
     if (!this.isFree) {
       this.y -= this.speed;
-      this.draw();
+      console.log(this.y)
     }
     if (this.y < 0) this.isFree = true;
   }
 
   start({ x, y }: { x: number; y: number }) {
-    this.isFree = false;
     this.x = x;
     this.y = y;
+    this.isFree = false;
   }
 
-  stop() {
+  reset() {
     this.isFree = true;
   }
 }
