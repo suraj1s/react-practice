@@ -1,28 +1,28 @@
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../../../utils/constants";
+import Game from "./game";
 
 class Player {
   x: number;
+  y: number;
   constructor(
-    public canvas2d: CanvasRenderingContext2D | null | undefined,
+    public game: Game,
     public speed: number,
     public width: number,
     public height: number
   ) {
-    this.canvas2d = canvas2d;
+    this.game = game;
     this.speed = speed;
     this.x = CANVAS_WIDTH / 2 - this.width / 2 - 100;
+    this.y = CANVAS_HEIGHT - this.height;
     this.width = width;
     this.height = height;
-    this.draw();
   }
 
-  draw() {
-    console.log("player draw");
-    if (!this.canvas2d) return;
-    this.canvas2d.clearRect(0,0,CANVAS_WIDTH, CANVAS_HEIGHT)
-    console.log("player draw.....");
-    this.canvas2d.fillStyle = "red";
-    this.canvas2d.fillRect(
+  draw(canvas2d: CanvasRenderingContext2D | null) {
+    // console.log("player draw.....", canvas2d, this.x, this.height,this.width);
+    if (!canvas2d) return;
+    canvas2d.fillStyle = "red";
+    canvas2d.fillRect(
       this.x,
       CANVAS_HEIGHT - this.height,
       this.width,
@@ -30,21 +30,23 @@ class Player {
     );
   }
 
-  move(direction: "left" | "right") {
- if (direction === "left" && !(this.x  <= 0) ) {
+  update() {
+    if (this.game.keys.indexOf("ArrowLeft") > -1 && !(this.x <= 0)) {
       this.x -= this.speed;
-      console.log("player...", this.x);
-    } else if (direction === "right" && !(this.x  >= CANVAS_WIDTH - this.width)) {
+    } else if (
+      this.game.keys.indexOf("ArrowRight") > -1 &&
+      !(this.x >= CANVAS_WIDTH - this.width)
+    ) {
       this.x += this.speed;
-      console.log("player...", this.x);
     }
-    this.draw();
+  }
+
+  shoot() {
+    const projectile = this.game.getFreeProjectile();
+    if (projectile) {
+      projectile.start({ x: this.x, y: this.y });
+    }
   }
 }
 
 export default Player;
-
-
-// if (this.x + 100 <= this.width/2 || this.x + 100 >= CANVAS_WIDTH - this.width/2) {
-//   this.x = 150
-//  } else
